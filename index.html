@@ -4,34 +4,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#000000">
   <title>CapOrFacts</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
-  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+
   <style>
     :root {
-      color-scheme: dark;
-      --bg: #000;
-      --text: #fff;
-      --muted: #aaa;
-      --line-a: #242424;
-      --line-b: #111;
-      --card: #090909;
-      --button: #20c75a;
-      --button-hover: #19ad4b;
-      --blue: #2684ff;
+      color-scheme: light dark;
+      --bg: #ffffff;
+      --text: #111111;
+      --line: rgba(0, 0, 0, 0.08);
+      --overlap: rgba(0, 0, 0, 0.06);
+      --green: #20c878;
+      --green-hover: #16a967;
     }
 
-    @media (prefers-color-scheme: light) {
+    @media (prefers-color-scheme: dark) {
       :root {
-        color-scheme: light;
-        --bg: #fff;
-        --text: #111;
-        --muted: #666;
-        --line-a: #e5e5e5;
-        --line-b: #f5f5f5;
-        --card: #fafafa;
+        --bg: #080808;
+        --text: #ffffff;
+        --line: rgba(255, 255, 255, 0.08);
+        --overlap: rgba(255, 255, 255, 0.05);
       }
     }
 
@@ -42,318 +37,243 @@
     body {
       margin: 0;
       min-height: 100vh;
-      overflow-x: hidden;
-      background: var(--bg);
+      background-color: var(--bg);
       color: var(--text);
-      font-family: Arial, Helvetica, sans-serif;
-      transition: background .2s, color .2s;
+      font-family: "Fredoka", sans-serif;
+      transition: background-color 0.2s, color 0.2s;
     }
 
-    /* Crossing background lines */
+    /* Background with crossing lines */
     .background-lines {
       position: fixed;
       inset: 0;
-      z-index: 0;
       pointer-events: none;
+      z-index: 0;
       background:
         repeating-linear-gradient(
-          0deg,
-          transparent 0 47px,
-          var(--line-a) 47px 48px
+          45deg,
+          transparent 0 48px,
+          var(--line) 49px 50px
         ),
         repeating-linear-gradient(
-          90deg,
-          transparent 0 47px,
-          var(--line-b) 47px 48px
+          -45deg,
+          transparent 0 48px,
+          var(--line) 49px 50px
         );
     }
 
-    header, main, footer {
+    .background-lines::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        45deg,
+        transparent 0 96px,
+        var(--overlap) 97px 99px
+      );
+    }
+
+    /* Header */
+    header {
       position: relative;
       z-index: 1;
+      padding: 24px;
     }
 
-    header {
+    /* NEW TEXT-ONLY LOGO */
+    .brand-logo {
+      display: inline-block;
+      color: var(--text);
+      font-family: "Fredoka", sans-serif;
+      font-weight: 600;
+      line-height: 1;
+    }
+
+    .brand-top {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 24px 7%;
+      align-items: baseline;
+      gap: 4px;
+      width: max-content;
+      white-space: nowrap;
     }
 
-    .brand {
-      font-size: 22px;
-      font-weight: 800;
-      letter-spacing: -1px;
+    .brand-cap {
+      font-size: 50px;
     }
 
-    .brand span {
-      color: var(--button);
+    .brand-or {
+      font-size: 25px;
     }
 
-    .status {
-      color: var(--muted);
-      font-size: 13px;
+    .brand-facts {
+      font-size: 75px;
+      white-space: nowrap;
+      width: max-content;
+      line-height: 0.95;
+      transform-origin: left top;
     }
 
+    /* Main page */
     main {
-      width: min(700px, 90%);
-      margin: 85px auto 70px;
+      position: relative;
+      z-index: 1;
+      min-height: 70vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       text-align: center;
-    }
-
-    .logo {
-      display: block;
-      width: 120px;
-      height: 120px;
-      margin: 0 auto 25px;
-      filter: drop-shadow(0 5px 20px #2684ff20);
+      padding: 24px;
     }
 
     h1 {
-      margin: 0;
-      font-size: clamp(40px, 8vw, 68px);
-      font-weight: 850;
-      letter-spacing: -3px;
+      font-size: clamp(38px, 8vw, 68px);
+      font-weight: 600;
+      margin: 0 0 14px;
     }
 
-    h1 span {
-      color: var(--blue);
+    .subtitle {
+      font-size: 18px;
+      margin: 0 0 30px;
+      opacity: 0.75;
     }
 
-    .description {
-      max-width: 480px;
-      margin: 20px auto 32px;
-      color: var(--muted);
-      font-size: 17px;
-      line-height: 1.7;
-    }
-
-    .download {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      min-width: 215px;
-      padding: 16px 30px;
+    .download-button {
+      display: inline-block;
+      padding: 15px 34px;
       border: none;
-      border-radius: 12px;
-      background: var(--button);
-      color: white;
+      border-radius: 14px;
+      background: var(--green);
+      color: #071b10;
+      font: 600 20px "Fredoka", sans-serif;
       text-decoration: none;
-      font-size: 16px;
-      font-weight: 750;
       cursor: pointer;
-      transition: background .2s, transform .2s;
+      transition: background 0.2s, transform 0.2s;
     }
 
-    .download:hover {
-      background: var(--button-hover);
+    .download-button:hover {
+      background: var(--green-hover);
       transform: translateY(-2px);
     }
 
-    .download:focus-visible {
-      outline: 3px solid var(--blue);
-      outline-offset: 4px;
-    }
-
-    .download svg {
-      width: 21px;
-      height: 21px;
-    }
-
-    .note {
-      margin-top: 18px;
-      color: var(--muted);
-      font-size: 12px;
-    }
-
-    .preview {
-      max-width: 440px;
-      margin: 95px auto 0;
-      padding: 25px;
-      border: 1px solid var(--line-a);
-      border-radius: 18px;
-      background: var(--card);
-      text-align: left;
-    }
-
-    .preview h2 {
-      margin: 0 0 10px;
-      font-size: 18px;
-    }
-
-    .preview p {
-      margin: 0;
-      color: var(--muted);
+    .download-note {
+      margin-top: 14px;
       font-size: 14px;
-      line-height: 1.7;
+      opacity: 0.65;
     }
 
     footer {
-      padding: 30px 15px;
-      color: var(--muted);
-      font-size: 12px;
+      position: relative;
+      z-index: 1;
+      padding: 20px;
       text-align: center;
+      font-size: 14px;
+      opacity: 0.65;
     }
 
-    @media (max-width: 500px) {
+    @media (max-width: 400px) {
       header {
-        padding: 20px 5%;
+        padding: 16px;
       }
 
-      main {
-        margin-top: 65px;
+      .brand-cap {
+        font-size: 42px;
       }
 
-      .preview {
-        margin-top: 70px;
+      .brand-or {
+        font-size: 21px;
+      }
+
+      .brand-facts {
+        font-size: 63px;
       }
     }
   </style>
 </head>
 
 <body>
-  <div class="background-lines" aria-hidden="true"></div>
+  <div class="background-lines"></div>
 
   <header>
-    
-<!-- Add inside <head> -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-<style>
-  .brand-logo {
-    display: inline-flex;
-    flex-direction: column;
-    align-items: stretch;
-    font-family: "Fredoka", sans-serif;
-    font-weight: 600;
-    line-height: 0.88;
-    color: var(--text);
-    text-align: left;
-  }
-
-  .brand-top {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    white-space: nowrap;
-  }
-
-  .brand-cap {
-    font-size: 44px;
-  }
-
-  .brand-or {
-    font-size: 23px;
-    margin-left: 5px;
-  }
-
-  .brand-facts {
-    font-size: 58px;
-    letter-spacing: -1px;
-    white-space: nowrap;
-  }
-</style>
-
-<div class="brand-logo">
-  <div class="brand-top">
-    <span>Cap</span><span class="brand-or">Or</span>
-  </div>
-  <div class="brand-facts">Facts</div>
-</div>
-    
-    <div class="status">Official website</div>
+    <div class="brand-logo" aria-label="Cap Or Facts">
+      <div class="brand-top">
+        <span class="brand-cap">Cap</span>
+        <span class="brand-or">Or</span>
+      </div>
+      <div class="brand-facts">Facts</div>
+    </div>
   </header>
 
   <main>
-    <!-- Blue checkmark connected to a blue X -->
-    <svg
-      class="logo"
-      viewBox="0 0 120 120"
-      xmlns="http://www.w3.org/2000/svg"
-      role="img"
-      aria-label="CapOrFacts checkmark and X logo"
-    >
-      <g
-        fill="none"
-        stroke="#2684ff"
-        stroke-width="9"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      >
-        <path d="M10 59 L38 84 L68 48"/>
-        <path d="M64 48 L78 35"/>
-        <path d="M73 49 L105 81"/>
-        <path d="M105 49 L73 81"/>
-      </g>
-    </svg>
-
-    <h1>Cap or <span>Facts?</span></h1>
-
-    <p class="description">
-      Think you can spot the truth?
-      Gather your friends, cast your votes,
-      and find out who is telling the truth.
+    <h1>Cap or Facts?</h1>
+    <p class="subtitle">
+      Think you know the truth? Put it to a vote.
     </p>
 
     <a
-      class="download"
+      class="download-button"
       id="downloadButton"
       href="#"
-      aria-label="Download CapOrFacts"
     >
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        aria-hidden="true"
-      >
-        <path d="M12 3v12"/>
-        <path d="m7 10 5 5 5-5"/>
-        <path d="M5 17v3h14v-3"/>
-      </svg>
-      Download
+      Download APK
     </a>
 
-    <p class="note">
-      Get ready to vote. Get ready to expose the cap.
+    <p class="download-note" id="downloadNote">
+      Android app coming soon.
     </p>
-
-    <section class="preview">
-      <h2>How does it work?</h2>
-      <p>
-        Create a server, invite your friends, and vote
-        CAP or FACTS. Let the majority decide!
-      </p>
-    </section>
   </main>
 
   <footer>
-    CapOrFacts · Made for the ultimate truth showdown
+    CapOrFacts · Decide what is cap and what is facts.
   </footer>
 
   <script>
-    // Add the direct download URL when your file is ready.
+    /*
+      When your APK is ready, replace the empty value
+      with its real download URL.
+    */
     const downloadUrl = "";
 
     const downloadButton =
       document.getElementById("downloadButton");
 
-    downloadButton.addEventListener("click", function (event) {
-      event.preventDefault();
+    const downloadNote =
+      document.getElementById("downloadNote");
 
+    downloadButton.addEventListener("click", function (event) {
       if (!downloadUrl) {
-        alert("The download isn't available yet. Check back soon!");
+        event.preventDefault();
+        downloadNote.textContent =
+          "The APK is not available for download yet.";
         return;
       }
 
-      window.location.href = downloadUrl;
+      downloadButton.href = downloadUrl;
     });
+
+    /*
+      Match the rendered width of Facts to the combined
+      rendered width of Cap + Or, including their gap.
+    */
+    function fitFacts() {
+      const top = document.querySelector(".brand-top");
+      const facts = document.querySelector(".brand-facts");
+
+      if (!top || !facts) return;
+
+      facts.style.transform = "scaleX(1)";
+
+      const topWidth = top.getBoundingClientRect().width;
+      const factsWidth = facts.getBoundingClientRect().width;
+
+      if (factsWidth > 0) {
+        facts.style.transform =
+          `scaleX(${topWidth / factsWidth})`;
+      }
+    }
+
+    document.fonts.ready.then(fitFacts);
+    window.addEventListener("resize", fitFacts);
   </script>
 </body>
 </html>
