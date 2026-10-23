@@ -214,7 +214,55 @@
   <div class="background-lines" aria-hidden="true"></div>
 
   <header>
-    <div class="brand">Cap<span>Or</span>Facts</div>
+    
+<!-- Add inside <head> -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  .brand-logo {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: stretch;
+    font-family: "Fredoka", sans-serif;
+    font-weight: 600;
+    line-height: 0.88;
+    color: var(--text);
+    text-align: left;
+  }
+
+  .brand-top {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    white-space: nowrap;
+  }
+
+  .brand-cap {
+    font-size: 44px;
+  }
+
+  .brand-or {
+    font-size: 23px;
+    margin-left: 5px;
+  }
+
+  .brand-facts {
+    font-size: 58px;
+    letter-spacing: -1px;
+    white-space: nowrap;
+  }
+</style>
+
+<div class="brand-logo">
+  <div class="brand-top">
+    <span class="brand-cap">Cap</span>
+    <span class="brand-or">Or</span>
+  </div>
+  <div class="brand-facts">Facts</div>
+</div>
+    
     <div class="status">Official website</div>
   </header>
 
