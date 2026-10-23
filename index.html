@@ -1,0 +1,300 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#000000">
+  <title>CapOrFacts</title>
+
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #000000;
+      --text: #ffffff;
+      --muted: #aaaaaa;
+      --line-light: #252525;
+      --line-dark: #111111;
+      --button: #20c75a;
+      --button-hover: #19ad4b;
+      --blue: #2684ff;
+      --card: #090909;
+    }
+
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #ffffff;
+        --text: #111111;
+        --muted: #666666;
+        --line-light: #e5e5e5;
+        --line-dark: #f5f5f5;
+        --card: #fafafa;
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      overflow-x: hidden;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    /* Intersecting background lines */
+    .background-lines {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      background:
+        repeating-linear-gradient(
+          0deg,
+          transparent 0px,
+          transparent 47px,
+          var(--line-light) 47px,
+          var(--line-light) 48px
+        ),
+        repeating-linear-gradient(
+          90deg,
+          transparent 0px,
+          transparent 47px,
+          var(--line-dark) 47px,
+          var(--line-dark) 48px
+        );
+      opacity: 0.85;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 22px 7%;
+    }
+
+    .brand {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -1px;
+    }
+
+    .brand span {
+      color: var(--button);
+    }
+
+    .status {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    main {
+      width: min(700px, 90%);
+      margin: 100px auto 60px;
+      text-align: center;
+    }
+
+    .logo {
+      width: 116px;
+      height: 116px;
+      margin: 0 auto 28px;
+      display: block;
+      filter: drop-shadow(0 8px 25px #2684ff22);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(40px, 8vw, 68px);
+      font-weight: 850;
+      letter-spacing: -3px;
+    }
+
+    h1 span {
+      color: var(--blue);
+    }
+
+    .description {
+      max-width: 480px;
+      margin: 20px auto 32px;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.7;
+    }
+
+    .download {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 16px 30px;
+      min-width: 210px;
+      background: var(--button);
+      color: #ffffff;
+      border: 0;
+      border-radius: 12px;
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: 750;
+      cursor: pointer;
+      transition: transform 0.2s, background 0.2s;
+    }
+
+    .download:hover {
+      background: var(--button-hover);
+      transform: translateY(-2px);
+    }
+
+    .download:focus-visible {
+      outline: 3px solid var(--blue);
+      outline-offset: 4px;
+    }
+
+    .download svg {
+      width: 21px;
+      height: 21px;
+    }
+
+    .note {
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .preview {
+      margin: 100px auto 0;
+      padding: 25px;
+      max-width: 440px;
+      border: 1px solid var(--line-light);
+      border-radius: 18px;
+      background: var(--card);
+      text-align: left;
+    }
+
+    .preview h2 {
+      margin: 0 0 8px;
+      font-size: 18px;
+    }
+
+    .preview p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    footer {
+      padding: 30px 15px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    @media (max-width: 500px) {
+      header {
+        padding: 20px 5%;
+      }
+
+      main {
+        margin-top: 75px;
+      }
+
+      .preview {
+        margin-top: 75px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="background-lines"></div>
+
+  <header>
+    <div class="brand">Cap<span>Or</span>Facts</div>
+    <div class="status">Official website</div>
+  </header>
+
+  <main>
+    <!-- Connected blue checkmark and X logo -->
+    <svg class="logo"
+         viewBox="0 0 120 120"
+         xmlns="http://www.w3.org/2000/svg"
+         role="img"
+         aria-label="Cap or Facts logo">
+      <g fill="none"
+         stroke="#2684ff"
+         stroke-width="9"
+         stroke-linecap="round"
+         stroke-linejoin="round">
+        <path d="M12 59 L43 87 L73 46"/>
+        <path d="M69 46 L87 28"/>
+        <path d="M78 48 L108 78"/>
+        <path d="M108 48 L78 78"/>
+      </g>
+    </svg>
+
+    <h1>Cap or <span>Facts?</span></h1>
+
+    <p class="description">
+      Think you can spot the truth?
+      Gather your friends, cast your votes,
+      and find out who is telling the truth.
+    </p>
+
+    <a class="download"
+       id="downloadButton"
+       href="#"
+       aria-label="Download CapOrFacts">
+      <svg viewBox="0 0 24 24"
+           fill="none"
+           stroke="currentColor"
+           stroke-width="2.5"
+           stroke-linecap="round"
+           stroke-linejoin="round"
+           aria-hidden="true">
+        <path d="M12 3v12"/>
+        <path d="m7 10 5 5 5-5"/>
+        <path d="M5 17v3h14v-3"/>
+      </svg>
+      Download
+    </a>
+
+    <p class="note">
+      Get ready to vote. Get ready to expose the cap.
+    </p>
+
+    <section class="preview">
+      <h2>How does it work?</h2>
+      <p>
+        Create a server, invite your friends, and vote
+        CAP or FACTS. Let the majority decide!
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    CapOrFacts · Made for the ultimate truth showdown
+  </footer>
+
+  <script>
+    // Add your actual downloadable file URL here later.
+    const downloadUrl = "";
+
+    const downloadButton =
+      document.getElementById("downloadButton");
+
+    downloadButton.addEventListener("click", function (event) {
+      if (!downloadUrl) {
+        event.preventDefault();
+        alert("The download isn't available yet. Check back soon!");
+        return;
+      }
+
+      downloadButton.href = downloadUrl;
+    });
+  </script>
+</body>
+</html>
